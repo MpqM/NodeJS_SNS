@@ -11,8 +11,7 @@
 <p align ="center">
   <a href="https://www.youtube.com/watch?v=-PwSEkOKk4E"><img src ="https://img.shields.io/badge/youtube-FF0000.svg?&style=for-the-badge&logo=youtube&logoColor=white"/></a>
   </br>
-  <img width="900" height="500" src="![스크린샷 2023-12-13 20-54-54](https://github.com/MpqM/NodeJS_SNS/assets/79093184/f6eb123c-2485-409c-9d8c-6decdce00eb1)
-">
+  <img width="900" height="500" src="https://github.com/MpqM/NodeJS_SNS/assets/79093184/f6eb123c-2485-409c-9d8c-6decdce00eb1">
 </p>
 
 - - -
