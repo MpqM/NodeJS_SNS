@@ -1,0 +1,88 @@
+<%- include('../partial/header') %>
+<div class="basic">
+    <div class="mb-3">
+        <div class="card ">
+            <h5 class="card-header text-start">친구 추가 요청</h5>
+            <div class="card-body">
+                <% if (currentUser.friendsRequests.length === 0) { %>
+                    <div class="card-text text-center text-muted">아직 친구 요청이 없습니다.</div>
+                <% } else { %>
+                    <% currentUser.friendsRequests.forEach((friendId) => { %>
+                        <% const friend = users.find(user => user._id.toString() === friendId) %>
+                            <div class="card" style="border:none;">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between">
+                                        <a class="linknodeco" href="/profile/<%= friendId %>"><p><%= friend.username %></p></a>
+                                        <div class="d-flex">
+                                            <form action="/friend/acceptfriendrequest/<%= friend.id %>?_method=PUT" method="POST" class="me-3">
+                                                <button class="btn btn-secondary btn-sm" type="submit">수락</button>
+                                            </form>
+                                            <form action="/friend/cancelfriendrequest/<%= currentUser._id %>/<%= friend.id %>?_method=PUT" method="POST">
+                                                <button class="btn btn-secondary btn-sm" type="submit">거절</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    <% }) %>
+                <% } %>
+            </div>
+        </div>
+    </div>
+    <div class="mb-3">
+        <div class="card">
+            <h5 class="card-header text-start">알 수도 있는 사람들 친구 추가</h5>
+            <div class="card-body">
+                <% users.forEach((user) => {  %>
+                    <% if (
+                        !(user._id.equals(currentUser.id)) && 
+                        !(currentUser.friends.find(friendId => friendId === user._id.toString())) &&
+                        !(currentUser.friendsRequests.find(friendId => friendId === user._id.toString()))
+                    ) { %>
+                        <div class="card" style="border:none;">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between">
+                                    <a class="linknodeco" href="/profile/<%= user._id %>"><p><%= user.username %></p></a>
+                                    <% if (user.friendsRequests.find(friendId => friendId === currentUser._id.toString())) { %>
+                                        <form action="/friend/cancelfriendrequest/<%= user._id %>/<%= currentUser._id %>?_method=PUT" method="POST" class="ms-auto">
+                                            <button class="btn btn-sm btn-secondary">취소</button>
+                                        </form>
+                                    <% } else { %>
+                                        <form action="/friend/addfriend/<%= user._id %>?_method=PUT" method="POST" class="ms-auto">
+                                            <button class="btn btn-sm btn-secondary">요청</button>
+                                        </form>
+                                    <% } %>
+                                </div>
+                            </div>
+                        </div>
+                    <% } %>
+                <% }) %>
+            </div>
+        </div>
+    </div>
+    <div class="mb-3">
+        <div class="card">
+            <h5 class="card-header text-start">친구들</h5>
+            <div class="card-body">
+                <% if (currentUser.friends.length === 0) { %>
+                    <div class="card-text text-center text-muted"> 아직 친구가 없습니다. </div>
+                <% } else { %>
+                    <% currentUser.friends.forEach((friendId) => { %>
+                        <% const friend = users.find(user => user._id.toString() === friendId) %>
+                            <div class="card" style="border:none;">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between">
+                                        <a class="linknodeco" href="/profile/<%= friendId %>"><p><%= friend.username %></p></a>
+                                        <form action="/friend/removefriend/<%= friendId %>?_method=PUT" method="POST">
+                                            <button class="btn btn-secondary btn-sm" type="submit">취소</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                    <% }) %>
+                <% } %>
+            </div>
+        </div>
+    </div>
+</div>
+<%- include('../partial/footer') %>

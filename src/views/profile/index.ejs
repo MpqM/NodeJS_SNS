@@ -1,0 +1,44 @@
+<%- include('../partial/header') %>
+<div class="basic">
+    <div class="card mb-3">
+        <h5 class="card-header">유저 정보</h5>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item"><span class="ms-2"><%= user.firstName %></span></li>
+            <li class="list-group-item"><span class="ms-2"><%= user.lastName%></span></li>
+            <li class="list-group-item"><i class="bi bi-gender-ambiguous"></i><span class="ms-2"><%= user.bio%></span></li>
+            <li class="list-group-item"><i class="bi bi-geo-alt"></i><span class="ms-2"><%= user.hometown %></span></li>
+            <li class="list-group-item"><i class="bi bi-building"></i><span class="ms-2"><%= user.workspace %></span></li>
+            <li class="list-group-item"><i class="bi bi-book"></i><span class="ms-2"><%= user.education %></span></li>
+            <li class="list-group-item"><i class="bi bi-telephone"></i><span class="ms-2"><%= user.contact %></span></li>
+        </ul>
+        <% if (currentUser._id.toString() === user._id.toString()) { %>
+            <div class="card-body text-center">
+                <a href="/profile/edit/<%= user._id %>" class="btn btn-secondary btn-block w-100"><i class="bi bi-pencil"></i></a>
+            </div>
+        <% } %>
+    </div>
+</div>
+</div>
+    <div class="basic">
+        <% if (currentUser._id.toString() === user._id.toString()) { %>
+            <div class="mb-3">
+            <%- include('../post/create-post') %>
+            </div>
+        <% } %>
+            <div class="mb-3">
+            <div class="card">
+                <div class="card-body">
+                    <p>포스트</p>
+                </div>
+            </div>
+            </div>
+            <div>
+            <% posts.forEach((post) => { %>
+                <%- include('../post/post-item', {post: post}) %>
+            <% }) %>
+            </div>
+    </div>
+</div>
+<%- include('../post/create-post-modal') %>
+<%- include('../partial/footer') %>
+

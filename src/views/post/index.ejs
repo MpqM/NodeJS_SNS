@@ -1,0 +1,11 @@
+<%- include('../partial/header') %>
+<div class="container">
+    <div style="max-width: 800px; margin: 1rem auto;"><%- include('./create-post') %></div>
+    <% posts.forEach((post) => { %>
+        <% if(post.author.id.equals(currentUser._id) || currentUser.friends.find(friend => friend === post.author.id.toString())) { %>
+            <div style="max-width: 800px; margin: 1rem auto;"><%- include('./post-item', { post: post }) %></div>
+        <% } %>
+    <% }) %>
+</div>
+<%- include('./create-post-modal') %>
+<%- include('../partial/footer') %>

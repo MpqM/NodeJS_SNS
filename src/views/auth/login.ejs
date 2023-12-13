@@ -1,0 +1,14 @@
+<%- include('../partial/header') %>
+<div class="auth" >
+    <h5 class="mb-3">로그인</h5>
+    <form method="POST" action="/auth/login">
+        <input type="email" class="mb-3 form-control" id="email" name="email" placeholder="이메일">
+        <input type="password" class="mb-3 form-control" id="password" name="password" placeholder="비밀번호">
+        <div class="btn-box">
+            <button type="submit" class="btn btn-secondary"><i class="bi bi-box-arrow-in-right"></i></button>
+            <a href="/auth/google" class="btn btn-secondary" role="button"><i class="bi bi-google"></i></a>
+            <a href="/signup" class="btn btn-secondary" role="button"><i class="bi bi-person-plus"></i></a>
+        </div>
+    </form>
+</div>
+<%- include('../partial/footer') %>
