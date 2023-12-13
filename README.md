@@ -1,5 +1,5 @@
 # SNS
-### ⚪ About Project
+#### ⚪ About Project
 * ##### NodeJS로 SNS 기본 기능 구현
 * ##### Passport(local, google), cookie-session 인증
 * ##### 게시글 불러오기, 생성, 수정, 삭제 / 댓글 불러오기, 생성, 수정, 삭제
