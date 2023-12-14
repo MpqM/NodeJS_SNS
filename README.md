@@ -43,7 +43,7 @@ npm start
 * ##### Profile: 사용자, 친구 및 다른 사용자의 프로필 확인 및 자신의 프로필 수정 가능
 * ##### else
   * ##### Passport.isAuthenticated()를 이용한 미들웨어로 리소스, 라우팅 비인가 접근 보호
-  * ##### 페이지 이동시 오류, 성공 메시지를 보이기 위해 flash 사용 및 res.locals객체에 user 정보 저장
+  * ##### 페이지 이동시 오류, 성공 메시지를 보이기 위해 flash 사용 및 res.locals 객체에 user 정보 저장
 
 - - -
 
