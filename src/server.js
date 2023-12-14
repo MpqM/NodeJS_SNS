@@ -11,7 +11,7 @@ const mainRouter = require('./routes/main');
 const authRouter = require('./routes/auth');
 const postRouter = require('./routes/post');
 const profileRouter = require('./routes/profile');
-const friendsRouter = require('./routes/friend');
+const friendRouter = require('./routes/friend');
 const sessionHandler = require('./middlewares/session');
 const flashHandler = require('./middlewares/flash');
 const { notFoundHandler, errorHandler } = require('./middlewares/error');
@@ -57,7 +57,7 @@ app.use('/', mainRouter);
 app.use('/auth', authRouter);
 app.use('/post', postRouter);
 app.use('/profile', profileRouter);
-app.use('/friend', friendsRouter);
+app.use('/friend', friendRouter);
 
 // 에러 핸들링 미들웨어
 app.use(notFoundHandler)
