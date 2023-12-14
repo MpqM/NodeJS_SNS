@@ -1,14 +1,13 @@
 const express = require('express');
 const { checkAuthenticated, checkPostOwn, checkCommentOwn } = require('../middlewares/auth');
-const Comment = require('../models/comment');
 const postController = require('../controllers/post')
-const Post = require('../models/post');
 const upload = require('../middlewares/multer');
 const router = express.Router();
 
-// 포스트
+// 게시글 경로(/post)요청 라우팅
+// 게시글
+router.get('/', checkAuthenticated, postController.renderPost);
 router.post('/', checkAuthenticated, upload, postController.createPost);
-router.get('/', checkAuthenticated, postController.getPosts);
 router.get('/edit/:id', checkPostOwn, postController.renderEditPost);
 router.put('/edit/:id', checkPostOwn, postController.editPost);
 router.delete('/:id', checkPostOwn, postController.deletePost);

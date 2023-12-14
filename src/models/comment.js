@@ -1,5 +1,6 @@
 const { default: mongoose } = require("mongoose");
 
+// 댓글 스키마
 const commentSchema = new mongoose.Schema({
     text: String,
     author: {

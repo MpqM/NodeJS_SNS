@@ -2,16 +2,19 @@ const Post = require('../models/post');
 const Comment = require('../models/comment');
 const User = require('../models/user');
 
+// 인증 되었는지 확인, 아니면 로그인 페이지로 리다이렉트
 function checkAuthenticated(req, res, next) {
     if (req.isAuthenticated()) {return next();}
     res.redirect('/login');
 }
 
+// 인증이 되었는지 확인 후 게시글 페이지로 리다이렉트
 function checkNotAuthenticated(req, res, next) {
     if (req.isAuthenticated()) { return res.redirect('/post');}
     next();
 }
 
+// 게시글의 소유자인지 확인 후 접근 허가 및 거부
 function checkPostOwn(req, res, next) {
     if (req.isAuthenticated()) {
         Post.findById(req.params.id, (err, post) => {
@@ -34,6 +37,7 @@ function checkPostOwn(req, res, next) {
     }
 }
 
+// 댓글의 소유자인지 확인 후 접근 허가 및 거부
 function checkCommentOwn(req, res, next) {
     if (req.isAuthenticated()) {
         Comment.findById(req.params.commentId, (err, comment) => {
@@ -56,6 +60,7 @@ function checkCommentOwn(req, res, next) {
     }
 }
 
+// 프로필 페이지에서 사용, 프로필이 자신인지 확인후 접근 권한 허가 및 거부
 function checkIsMe(req, res, next) {
     if (req.isAuthenticated()) {
         User.findById(req.params.id, (err, user) => {

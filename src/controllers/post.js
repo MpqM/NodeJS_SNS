@@ -1,9 +1,8 @@
-const { response } = require("express");
 const Post = require("../models/post");
 const Comment = require("../models/comment");
 
-// 포스트
-async function getPosts(req, res, next) {
+// 게시글 페이지 렌더링 컨트롤러
+async function renderPost(req, res, next) {
     try {
         const posts = await Post.find().populate('comments').sort({ createdAt: -1 })
         req.flash('success', '포스트들을 불러오는데 성공했습니다.');
@@ -15,6 +14,7 @@ async function getPosts(req, res, next) {
     }
 }
 
+// 게시글 생성 컨트롤러
 async function createPost(req, res, next) {
     try {
         console.log(req.body);
@@ -36,8 +36,10 @@ async function createPost(req, res, next) {
     }
 }
 
+// 게시글 수정 페이지 렌더링 컨트롤러
 function renderEditPost(req, res, next) { res.render('post/edit-post', { post: req.post }) }
 
+// 게시글 수정 컨트롤러
 async function editPost(req, res, next) {
     try {
         await Post.findByIdAndUpdate(req.params.id, req.body)
@@ -50,6 +52,7 @@ async function editPost(req, res, next) {
     }
 }
 
+// 게시글 삭제 컨트롤러
 async function deletePost(req, res, next) {
     try {
         await Post.findByIdAndDelete(req.params.id);
@@ -62,7 +65,7 @@ async function deletePost(req, res, next) {
     }
 }
 
-// 좋아요
+// 좋아요 컨트롤러
 async function likePost(req, res, next) {
     try {
         const post = await Post.findById(req.params.id)
@@ -81,7 +84,7 @@ async function likePost(req, res, next) {
     }
 }
 
-// 댓글
+// 댓글 생성 컨트롤러
 async function createComment(req, res, next) {
     try {
         const post = await Post.findById(req.params.id)
@@ -100,6 +103,7 @@ async function createComment(req, res, next) {
     }
 }
 
+// 댓글 수정 페이지 렌더링 컨트롤러
 async function renderEditComment(req, res, next) {
     try {
         const post = await Post.findById(req.params.id)
@@ -113,6 +117,7 @@ async function renderEditComment(req, res, next) {
     }
 }
 
+// 댓글 수정 컨트롤러
 async function editComment(req, res, next){
     try {
         await Comment.findByIdAndUpdate(req.params.commentId, req.body)
@@ -125,6 +130,7 @@ async function editComment(req, res, next){
     }
 }
 
+// 댓글 삭제 컨트롤러
 async function deleteComment(req, res, next) {
     try {
         await Comment.findByIdAndDelete(req.params.commentId)
@@ -138,6 +144,6 @@ async function deleteComment(req, res, next) {
 }
 
 module.exports = {
-    getPosts, createPost, renderEditPost, editPost, deletePost,
+    renderPost, createPost, renderEditPost, editPost, deletePost,
     likePost, createComment, renderEditComment, editComment, deleteComment
 }

@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
+// 유저 스키마
 const userSchema = new mongoose.Schema({
     email: { type: String, unique: true },
     password: { type: String, minLength: 3 },

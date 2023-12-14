@@ -1,5 +1,6 @@
 const User = require("../models/user");
 
+// 친구 페이지 렌더링 컨트롤러
 async function renderFriend(req, res, next) {
     try {
         const users = await User.find({})
@@ -12,6 +13,7 @@ async function renderFriend(req, res, next) {
     }
 }
 
+// 친구 추가 컨트롤러
 async function addFriend(req, res, next) {
     try {
         const user = await User.findById(req.params.id)
@@ -25,6 +27,7 @@ async function addFriend(req, res, next) {
     }
 }
 
+// 친구 요청 취소 컨트롤러
 async function cancelFriendRequest(req, res, next) {
     try {
         const user = await User.findById(req.params.firstId)
@@ -40,6 +43,8 @@ async function cancelFriendRequest(req, res, next) {
     }
 }
 
+
+// 친구 요청 수락 컨트롤러
 async function acceptFriendRequest(req, res, next) {
     try {
         const user = await User.findById(req.params.id)
@@ -57,6 +62,7 @@ async function acceptFriendRequest(req, res, next) {
     }
 }
 
+// 친구 삭제 컨트롤러
 async function removeFriend(req, res, next) {
     try {
     const user = await User.findById(req.params.id)
